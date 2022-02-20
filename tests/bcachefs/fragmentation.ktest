@@ -1,0 +1,38 @@
+#!/bin/bash
+
+require-lib bcachefs-test-libs.sh
+
+require-kernel-config MD
+require-kernel-config BLK_DEV_MD
+require-kernel-config MD_FAULTY
+
+config-scratch-devs 4G
+config-scratch-devs 4G
+config-scratch-devs 4G
+config-scratch-devs 4G
+config-scratch-devs 4G
+
+config-timeout $(stress_timeout)
+
+test_fragmentationbug()
+{
+    bcachefs format -f --errors=panic --replicas=2 --background_compression=lz4 \
+        --bucket=1M /dev/sdb \
+        --bucket=1M /dev/sdc
+    mount -t bcachefs /dev/sdb:/dev/sdc /mnt
+
+    mkdir -p /mnt/tmp
+    export count=0
+    while [ $count -le $((2048*4)) ]; do
+      dd if=/dev/urandom status=none count=1 bs=256k of=/mnt/tmp/$count.file
+      export count=$(($count+1))
+    done
+    bcachefs device add --bucket=1M /mnt /dev/sdd
+
+    printf "sleeping for 10s\n"
+    sleep 10
+
+    export cached=$(bcachefs fs usage /mnt -h | tail -n 9 | grep cached)
+
+     [[ "$cached" != *"G"* ]]
+}
