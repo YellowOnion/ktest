@@ -1115,3 +1115,39 @@ test_dump()
     umount /mnt
     bcachefs dump -o /tmp/sdb.qcow2 /dev/sdb
 }
+
+test_counters()
+{
+    run_quiet "" bcachefs format /dev/sdb
+
+    mount -t bcachefs /dev/sdb /mnt
+
+    # io_write
+    dd if=/dev/urandom bs=1M count=100 oflag=direct of=/mnt/test
+    # io_read
+    dd if=/mnt/test iflag=direct bs=1M count=50 of=/dev/null
+
+    FILES=/sys/fs/bcachefs/*/counters/*
+
+    I=0
+    # All these files should have contents
+    for F in $FILES
+    do
+        I=$(($I+1))
+        [ -s $F ]
+    done
+
+    tail -n 1 /sys/fs/bcachefs/*/counters/* > counters1
+
+    umount /mnt
+
+    bcachefs show-super -f counters /dev/sdb | tail -n $(($I+1))
+
+    mount -t bcachefs /dev/sdb /mnt
+
+    tail -n 1 /sys/fs/bcachefs/*/counters/* > counters2
+
+    diff counters1 counters2
+
+    tail -n +1 $FILES
+}
