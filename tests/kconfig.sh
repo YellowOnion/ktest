@@ -78,7 +78,7 @@ esac
 #require-kernel-config NO_HZ
 #require-kernel-config HZ_100
 
-require-kernel-config LOCALVERSION_AUTO
+require-kernel-config LOCALVERSION_AUTO=n
 
 require-kernel-config HIGH_RES_TIMERS
 
@@ -263,3 +263,19 @@ require-kernel-config DEBUG_KERNEL
 
 # expensive, doesn't catch that much
 # require-kernel-config DEBUG_PAGEALLOC
+#
+## nixos-shell requirements
+require-kernel-config OVERLAY_FS
+require-kernel-config CRYPTO_USER_API_HASH
+require-kernel-config CRYPTO_HMAC
+require-kernel-config DMIID
+require-kernel-config AUTOFS4_FS
+require-kernel-config TMPFS_POSIX_ACL
+require-kernel-config TMPFS_XATTR
+require-kernel-config SECCOMP
+require-kernel-config BLK_DEV_INITRD=y
+require-kernel-config MD_RAID0
+require-kernel-config MD_RAID1
+require-kernel-config MD_RAID10
+require-kernel-config MD_RAID456
+require-kernel-config VIRTIO_BALLOON
