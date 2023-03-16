@@ -1,7 +1,6 @@
-{ linuxManualConfig, buildPackages, src, buildRoot, kernelVersion ? "6.1.0", ...}:
+{ linuxManualConfig, buildPackages, src, buildRoot, version, kernelVersion, ...}:
 let
-    version = "${kernelVersion}-ktest";
-    modDirVersion = "${kernelVersion}-ktest";
+  modDirVersion = kernelVersion;
 in
 (linuxManualConfig {
   inherit src version modDirVersion;
@@ -11,6 +10,7 @@ in
   dontStrip = true;
   phases = [ "buildPhase" "installPhase"] ;
   nativeBuildInputs = [ buildPackages.kmod ] ++ attrs.nativeBuildInputs;
+
   buildPhase = ''
       export buildRoot="$(pwd)/build"
       cp -r ${buildRoot} $buildRoot
