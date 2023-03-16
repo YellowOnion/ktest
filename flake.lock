@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "bcachefs-tools": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": "nixpkgs",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1678885141,
+        "narHash": "sha256-fFNmLdFMjc/Ymdvp/Oh4QqZuhd8ytst5TfPRGHco82U=",
+        "ref": "refs/heads/master",
+        "rev": "ec28e6bfa269daf953af95610c0d1af3e7df1c0a",
+        "revCount": 1038,
+        "type": "git",
+        "url": "https://evilpiepirate.org/git/bcachefs-tools.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://evilpiepirate.org/git/bcachefs-tools.git"
+      }
+    },
     "buildRoot": {
       "flake": false,
       "locked": {
@@ -13,7 +33,39 @@
         "type": "path"
       }
     },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673956053,
+        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1677342105,
+        "narHash": "sha256-kv1fpkfCJGb0M+LZaCHFUuIS9kRIwyVgupHu86Y28nc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "b1f87ca164a9684404c8829b851c3586c4d9f089",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1678241273,
         "narHash": "sha256-S4JTbik1zDBJYmJCF2o2oli9XYeQym4PgllTe4Z1NcA=",
@@ -30,10 +82,11 @@
     },
     "root": {
       "inputs": {
+        "bcachefs-tools": "bcachefs-tools",
         "buildRoot": "buildRoot",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "src": "src",
-        "utils": "utils"
+        "utils": "utils_2"
       }
     },
     "src": {
@@ -49,6 +102,21 @@
       }
     },
     "utils": {
+      "locked": {
+        "lastModified": 1676283394,
+        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
       "locked": {
         "lastModified": 1676283394,
         "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",

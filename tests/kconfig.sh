@@ -78,7 +78,7 @@ esac
 #require-kernel-config NO_HZ
 #require-kernel-config HZ_100
 
-require-kernel-config LOCALVERSION_AUTO=n
+require-kernel-config LOCALVERSION_AUTO=y
 
 require-kernel-config HIGH_RES_TIMERS
 
